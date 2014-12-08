@@ -1,0 +1,18 @@
+apply plugin: "java"
+apply plugin: "eclipse-wtp"
+
+sourceCompatibility = 1.6
+ext.springVersion = "4.0.3.RELEASE"
+ext.slf4jVersion = "1.7.7"
+ext.springSecurityVersion = "3.2.3.RELEASE"
+ext.serverHome = "D:\\Dev\\tomcat\\apache-tomcat-8.0.15"
+ext.serverLib = ext.serverHome + "\\lib"
+
+println "Tomcat DIR: "+ext.serverLib
+
+repositories {
+/*	maven { url "http://repo.spring.io/libs-snapshot" }
+	maven { url "http://repository.codehaus.org" }
+*/
+	mavenCentral()
+}

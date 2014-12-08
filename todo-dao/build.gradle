@@ -1,0 +1,26 @@
+apply from: "../shared.gradle"
+
+
+group = 'com.welumbe.dao'
+version = '1.0'
+
+dependencies{
+	compile "org.slf4j:jcl-over-slf4j:$slf4jVersion","org.slf4j:jul-to-slf4j:$slf4jVersion"
+	compile "org.springframework:spring-core:$springVersion"
+	compile "org.springframework:spring-orm:$springVersion"
+	compile "org.springframework:spring-context:$springVersion"
+	compile "org.hibernate:hibernate-core:4.3.5.Final"
+	compile "com.fasterxml.jackson.core:jackson-annotations:2.3.3"
+	//runtime "javax.faces:jsf-impl:1.2-b19"
+	//runtime "cglib:cglib:2.2.2"
+	//runtime "c3p0:c3p0:0.9.1.2"
+	compile "org.postgresql:postgresql:9.2-1004-jdbc4"
+	//compile "org.postgresql:postgresql:9.1-901-1.jdbc4"
+	runtime "org.slf4j:slf4j-log4j12:$slf4jVersion"
+	testCompile "junit:junit:4.8.2"
+	testCompile "org.springframework:spring-test:$springVersion"
+}
+
+task createWrapper(type:Wrapper){
+	gradleVersion='1.3'
+}

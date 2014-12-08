@@ -1,0 +1,5 @@
+
+rootProject.name = "todo-spring-hibernate"
+
+include "todo-web"
+include "todo-dao"
