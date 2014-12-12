@@ -39,13 +39,14 @@ public class TodoDaoImpl extends AbstractDao implements TodoDao {
 	public boolean update(Todo todo) {
 		Session sesh = session();
 		if (todo.getId() > 0) {
+			int i=0;
 			for (TodoItem item : todo.getItems()) {
 				item.setTodo(todo);
 				if (item.getId() > 0) {
-					sesh.update(item);
-				} else {
-					sesh.save(item);
+					sesh.delete(item); // to avoid unique constraint on re-ordering
 				}
+				item.setOrdering(++i);
+				sesh.save(item);
 			}
 			sesh.update(todo);
 		} else {
@@ -60,13 +61,11 @@ public class TodoDaoImpl extends AbstractDao implements TodoDao {
 		Session sesh = session();
 		Serializable id = sesh.save(todo);
 		if (id != null) {
+			int i=0;
 			for (TodoItem item : todo.getItems()) {
 				item.setTodo(todo);
-				if (item.getId() > 0) {
-					sesh.update(item);
-				} else {
-					sesh.save(item);
-				}
+				item.setOrdering(++i);
+				sesh.save(item);
 			}
 		}
 		return (Long) id;

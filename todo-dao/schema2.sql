@@ -14,7 +14,7 @@ CREATE TABLE todo (
 CREATE TABLE todo_item (
 	todo_item_id bigserial primary key,
 	todo_id bigint references todo(todo_id),
-	order_index integer
+	order_index integer not null,
 	value varchar(1000)
 	UNIQUE(todo_id, order_index)
 );

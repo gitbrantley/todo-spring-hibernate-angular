@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 
@@ -23,6 +24,7 @@ public class Todo {
 	@Column(name="todo_name")
 	private String name;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "todo", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OrderBy("ordering")
 	private Set<TodoItem> items;
 	
 	

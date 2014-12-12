@@ -19,12 +19,17 @@ public class TodoItem {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="todo_item_id")
 	private long id;
-	@Column(name="value")
-	private String value;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "todo_id", nullable = false)
 	@JsonIgnore
 	private Todo todo;
+	
+	@Column(name="ordering")
+	private int ordering;
+	
+	@Column(name="value")
+	private String value;
 
 	public long getId() {
 		return id;
@@ -49,6 +54,12 @@ public class TodoItem {
 	public void setTodo(Todo todo) {
 		this.todo = todo;
 	}
-	
-	
+
+	public int getOrdering() {
+		return ordering;
+	}
+
+	public void setOrdering(int ordering) {
+		this.ordering = ordering;
+	}
 }

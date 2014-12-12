@@ -29,9 +29,14 @@ public class TestTodoDaoImpl extends AbstractSpringBasedTest {
 	public void testCreateTodo() {
 		Todo t = new Todo();
 		t.setName("First Todo List");
+		Set<TodoItem> items = new HashSet<TodoItem>();
 		TodoItem i = new TodoItem();
 		i.setValue("First todo item!");
-		Set<TodoItem> items = new HashSet<TodoItem>();
+		i.setOrdering(1);
+		items.add(i);
+		i = new TodoItem();
+		i.setValue("Second todo item!");
+		i.setOrdering(2);
 		items.add(i);
 		t.setItems(items);
 		assertTrue("Did not get back a valid rid for Todo", dao.create(t) > 0);
