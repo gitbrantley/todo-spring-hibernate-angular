@@ -1,8 +1,1 @@
 /com/
-/dao-beans.xml
-/dao-context.xml
-/ehcache.xml
-/hibernate.cfg.xml
-/log4j.xml
-/spring-test.properties
-/test-dao-context.xml

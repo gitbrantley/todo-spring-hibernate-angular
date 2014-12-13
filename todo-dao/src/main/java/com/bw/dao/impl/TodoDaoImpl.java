@@ -18,10 +18,7 @@ import com.bw.hibernate.entity.TodoItem;
 @Repository("todoDao")
 @Transactional(readOnly=true)
 public class TodoDaoImpl extends AbstractDao implements TodoDao {
-	
-	
 
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Todo> list(TodoCriteria cri) {
