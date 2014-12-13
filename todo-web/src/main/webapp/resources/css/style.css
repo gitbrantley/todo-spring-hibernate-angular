@@ -1,0 +1,49 @@
+
+h1 {
+	text-align: center;
+	font-weight: bold;
+}
+
+.todos {
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.todo-container {
+	margin: 2em 0 0.5em 0;
+	list-style-type: none;
+}
+
+.todo-name {
+	width: 100%;
+	font-size: 2em;
+	margin-bottom: 0.5em;
+}
+
+.item {
+	width: 94%;
+	margin: 0.5em 0 0 0;
+	display:inline;
+}
+
+.delete-item {
+	width: 5%;
+}
+
+.add-item {
+	margin: 0.5em 0 0 2.75em;
+}
+
+.new-todo {
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-top: 1em;
+}
+
+.save {
+	width: 100%;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin-top: 1em;
+}
