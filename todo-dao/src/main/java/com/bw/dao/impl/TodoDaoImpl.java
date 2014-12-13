@@ -36,16 +36,23 @@ public class TodoDaoImpl extends AbstractDao implements TodoDao {
 	public boolean update(Todo todo) {
 		Session sesh = session();
 		if (todo.getId() > 0) {
-			int i=0;
+			Todo dbTodo = (Todo) sesh.get(Todo.class, todo.getId());
+			if (dbTodo == null) {
+				throw new NullPointerException("Todo with id "+todo.getId()+" not found");
+			}
+			// Avoid having to keep track of deletes and worry about ordering constraint
+			for (TodoItem it : dbTodo.getItems()) {
+				sesh.delete(it);
+			}
+			int i=1;
 			for (TodoItem item : todo.getItems()) {
 				item.setTodo(todo);
-				if (item.getId() > 0) {
-					sesh.delete(item); // to avoid unique constraint on re-ordering
-				}
-				item.setOrdering(++i);
+				item.setOrdering(i);
 				sesh.save(item);
+				i++;
 			}
-			sesh.update(todo);
+			dbTodo.setName(todo.getName());
+			sesh.update(dbTodo);
 		} else {
 			throw new IllegalArgumentException("Todo missing id");
 		}

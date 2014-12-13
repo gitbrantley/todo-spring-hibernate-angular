@@ -11,7 +11,6 @@ dependencies{
 	compile "org.springframework:spring-context:$springVersion"
 	compile "org.hibernate:hibernate-core:4.3.5.Final"
 	compile "com.fasterxml.jackson.core:jackson-annotations:2.3.3"
-	//runtime "javax.faces:jsf-impl:1.2-b19"
 	//runtime "cglib:cglib:2.2.2"
 	//runtime "c3p0:c3p0:0.9.1.2"
 	compile "org.postgresql:postgresql:9.2-1004-jdbc4"

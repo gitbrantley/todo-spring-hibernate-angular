@@ -24,7 +24,7 @@ public class Todo {
 	@Column(name="todo_name")
 	private String name;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "todo", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@OrderBy("ordering")
+	@OrderBy("ordering asc")
 	private Set<TodoItem> items;
 	
 	
