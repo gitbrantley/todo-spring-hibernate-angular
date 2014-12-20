@@ -7,11 +7,13 @@ Postgres 9.3.
 ## Setup
 
 *To Use in Eclipse*
-1. Open a command line terminal at the top directory
-1. Run the gradle-wrapper script to download Gradle, the app dependencies and
+<ol>
+<li>Open a command line terminal at the top directory</li>
+<li>Run the gradle-wrapper script to download Gradle, the app dependencies and
 create the eclipse project files:
-    $ gradlew cleanEclipse eclipse
-1. Start Eclipse IDE and choose File -> Import
-1. Select 'Existing Projects into Workspace'
-1. Choose the root project folder for the 'root directory.' 'todo-dao', and
-'todo-web' should appear. Click Next to continue.
+    $ gradlew cleanEclipse eclipse</li>
+<li>Start Eclipse IDE and choose File -> Import</li>
+<li>Select 'Existing Projects into Workspace'</li>
+<li>Choose the root project folder for the 'root directory.' 'todo-dao', and
+'todo-web' should appear. Click Next to continue.</li>
+</ol>
