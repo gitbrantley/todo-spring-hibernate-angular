@@ -30,6 +30,19 @@ h1 {
 	width: 5%;
 }
 
+
+@media (max-width: 768px) {
+	.item {
+		width: 86%;
+		margin: 0.5em 0 0 0;
+		display:inline;
+	}
+	
+	.delete-item {
+		width: 10%;
+	}
+}
+
 .add-item {
 	margin: 0.5em 0 0 2.75em;
 }
