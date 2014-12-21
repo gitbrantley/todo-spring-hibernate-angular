@@ -49,7 +49,7 @@ public class TestTodoDaoImpl extends AbstractSpringBasedTest {
 		assertTrue("Did not get back any Todo lists", list.size() > 0);
 		println("Got back "+list.size());
 		for (Todo t : list) {
-			println(t.getId() + " " + t.getName());
+			println(t.getId() + " " + t.getName()+" by "+t.getAuthor().getUsername());
 			Set<TodoItem> items = t.getItems();
 			println("\tHas "+items.size());
 			for (TodoItem i : items) {

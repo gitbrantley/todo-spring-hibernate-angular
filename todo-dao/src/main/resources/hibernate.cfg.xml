@@ -15,5 +15,6 @@
 		
 		<mapping class="com.bw.hibernate.entity.Todo"/>
 		<mapping class="com.bw.hibernate.entity.TodoItem"/>
+		<mapping class="com.bw.hibernate.entity.Author"/>
 	</session-factory>
 </hibernate-configuration>

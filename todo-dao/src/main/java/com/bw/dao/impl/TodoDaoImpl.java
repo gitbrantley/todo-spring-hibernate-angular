@@ -27,6 +27,9 @@ public class TodoDaoImpl extends AbstractDao implements TodoDao {
 			c.setFetchMode("items", FetchMode.JOIN);
 			c.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		}
+		if (cri.isIncludeAuthor()) {
+			c.setFetchMode("author", FetchMode.JOIN);
+		}
 		List<Todo> list = c.list();
 		return list;
 	}
