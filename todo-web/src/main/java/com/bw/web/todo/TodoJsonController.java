@@ -15,6 +15,8 @@ import com.bw.dao.TodoDao;
 import com.bw.dao.criteria.TodoCriteria;
 import com.bw.hibernate.entity.Todo;
 import com.bw.web.todo.dto.JsonResponse;
+import com.bw.web.todo.security.SecurityUtils;
+import com.bw.web.todo.security.TodoUser;
 
 @Controller
 public class TodoJsonController {
@@ -25,8 +27,13 @@ public class TodoJsonController {
 	
 	@RequestMapping(value="/todos", method = RequestMethod.GET)
 	public @ResponseBody JsonResponse listTodos() {
-		List<Todo> todos = todoDao.list(new TodoCriteria());
-		logger.debug("Returning list of "+todos.size());
+		TodoCriteria cri = new TodoCriteria();
+		TodoUser user = SecurityUtils.getUser();
+		if (user != null) {
+			cri.setAuthorId(user.getAuthorId());
+		}
+		List<Todo> todos = todoDao.list(cri);
+		logger.debug("Returning list of "+todos.size()+" for user "+(user != null ? user.getUsername() : "ANON"));
 		return new JsonResponse(true, todos);
 	}
 	

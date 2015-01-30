@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,10 @@ public class TodoDaoImpl extends AbstractDao implements TodoDao {
 		}
 		if (cri.isIncludeAuthor()) {
 			c.setFetchMode("author", FetchMode.JOIN);
+		}
+		if (cri.getAuthorId() > 0) {
+			c.createAlias("t.author", "a");
+			c.add(Restrictions.eq("a.id", cri.getAuthorId()));
 		}
 		List<Todo> list = c.list();
 		return list;

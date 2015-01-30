@@ -9,6 +9,7 @@ dependencies{
 	compile "org.springframework:spring-core:$springVersion"
 	compile "org.springframework:spring-orm:$springVersion"
 	compile "org.springframework:spring-context:$springVersion"
+	compile "org.springframework.security:spring-security-core:$springSecurityVersion"
 	compile "org.hibernate:hibernate-core:4.3.5.Final"
 	compile "com.fasterxml.jackson.core:jackson-annotations:2.3.3"
 	//runtime "cglib:cglib:2.2.2"

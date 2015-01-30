@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="author")
 public class Author {
@@ -44,6 +46,7 @@ public class Author {
 	public void setPasswordEncoded(String passwordEncoded) {
 		this.passwordEncoded = passwordEncoded;
 	}
+	@JsonIgnore
 	public Set<Todo> getTodos() {
 		return todos;
 	}

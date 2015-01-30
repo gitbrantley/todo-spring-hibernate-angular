@@ -8,6 +8,8 @@ Postgres 9.3.
 
 *To Use in Eclipse*
 <ol>
+<li>Open shared.gradle and update the 'ext.serverHome' variable to the root dir.
+of tomcat</li>
 <li>Open a command line terminal at the top directory</li>
 <li>Run the gradle-wrapper script to download Gradle, the app dependencies and
 create the eclipse project files:

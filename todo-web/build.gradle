@@ -17,9 +17,6 @@ dependencies{
 	compile "javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1"
 	runtime "taglibs:standard:1.1.2"
 	runtime fileTree(dir: serverLib, include: ['servlet-api.jar','jsp-api.jar'])
-//	runtime "javax.faces:jsf-api:1.2_02"
- 
-	
 	
 	testCompile "junit:junit:4.8.2"
 	testCompile "org.springframework:spring-test:$springVersion"
