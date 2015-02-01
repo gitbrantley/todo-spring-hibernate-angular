@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bw.dao.TodoDao;
 import com.bw.dao.criteria.TodoCriteria;
+import com.bw.hibernate.entity.Author;
 import com.bw.hibernate.entity.Todo;
 import com.bw.web.todo.dto.JsonResponse;
 import com.bw.web.todo.security.SecurityUtils;
 import com.bw.web.todo.security.TodoUser;
 
 @Controller
+@RequestMapping("/rest")
 public class TodoJsonController {
 	
 	private static Logger logger = Logger.getLogger(TodoJsonController.class);
@@ -41,14 +43,29 @@ public class TodoJsonController {
 	
 	@RequestMapping(value="/todos", method=RequestMethod.PUT)
 	public @ResponseBody JsonResponse updateTodos(@RequestBody TodoList list) {
+		Author auth = new Author();
+		auth.setId(SecurityUtils.getUser().getAuthorId());
 		for (Todo todo : list) {
+			todo.setAuthor(auth);
 			if (todo.getId() > 0) {
-				logger.debug("saving: "+todo.getName());
+				logger.debug("Saving ["+todo.getName()+"]");
 				todoDao.update(todo);
 			} else {
+				logger.debug("Missing id for todo ["+todo.getName()+"] creating instead");
 				todoDao.create(todo);
 			}
 				
+		}
+		return new JsonResponse(true, null);
+	}
+	
+	@RequestMapping(value="/todos", method=RequestMethod.POST)
+	public @ResponseBody JsonResponse createTodos(@RequestBody TodoList list) {
+		Author auth = new Author();
+		auth.setId(SecurityUtils.getUser().getAuthorId());
+		for (Todo todo : list) {
+			todo.setAuthor(auth);
+			todoDao.create(todo);
 		}
 		return new JsonResponse(true, null);
 	}

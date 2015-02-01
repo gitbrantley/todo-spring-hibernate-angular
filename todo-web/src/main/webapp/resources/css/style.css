@@ -47,8 +47,11 @@ h1 {
 	margin: 0.5em 0 0 2.75em;
 }
 
-.new-todo {
+.wide-button {
 	width: 100%;
+}
+
+.new-todo {
 	font-weight: bold;
 	font-size: 1.2em;
 	margin-top: 1em;
@@ -59,4 +62,9 @@ h1 {
 	font-weight: bold;
 	font-size: 1.5em;
 	margin-top: 1em;
+}
+
+.logout {
+	font-weight: bold;
+	margin-top: 2em;
 }

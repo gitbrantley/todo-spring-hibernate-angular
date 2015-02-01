@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bw.dao.TodoDao;
 import com.bw.dao.criteria.TodoCriteria;
+import com.bw.hibernate.entity.Author;
 import com.bw.hibernate.entity.Todo;
 import com.bw.hibernate.entity.TodoItem;
 
@@ -71,6 +72,10 @@ public class TodoDaoImpl extends AbstractDao implements TodoDao {
 	@Override
 	public long create(Todo todo) {
 		Session sesh = session();
+		if (todo.getAuthor() != null) {
+			Author auth = (Author) sesh.load(Author.class, todo.getAuthor().getId());
+			todo.setAuthor(auth);
+		}
 		Serializable id = sesh.save(todo);
 		if (id != null) {
 			int i=0;

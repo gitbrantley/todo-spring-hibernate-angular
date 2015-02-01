@@ -21,7 +21,7 @@
     </category>
     
     <category name="org.springframework" additivity="true">
-        <priority value="debug"/>
+        <priority value="error"/>
     </category>
     
     <category name="org.hibernate.cache" additivity="true">
