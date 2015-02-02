@@ -26,7 +26,7 @@ public class TodoItem {
 	private Todo todo;
 	
 	@Column(name="ordering")
-	private int ordering;
+	private int ordering=-1;
 	
 	@Column(name="value")
 	private String value;

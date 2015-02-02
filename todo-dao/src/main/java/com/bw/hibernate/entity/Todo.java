@@ -1,5 +1,6 @@
 package com.bw.hibernate.entity;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -27,7 +28,7 @@ public class Todo {
 	private String name;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "todo", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@OrderBy("ordering asc")
-	private Set<TodoItem> items;
+	private Set<TodoItem> items = new LinkedHashSet<TodoItem>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "author_id", nullable = true)
@@ -52,11 +53,17 @@ public class Todo {
 	public void setItems(Set<TodoItem> items) {
 		this.items = items;
 	}
+	public void addItem(TodoItem item) {
+		this.items.add(item);
+	}
 	public Author getAuthor() {
 		return author;
 	}
 	public void setAuthor(Author author) {
 		this.author = author;
 	}
-
+	@Override
+	public String toString() {
+		return "Todo [id=" + id + ", name=" + name + "]";
+	}
 }
