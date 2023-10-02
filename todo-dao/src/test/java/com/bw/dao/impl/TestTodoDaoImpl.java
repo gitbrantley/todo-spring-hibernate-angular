@@ -2,7 +2,6 @@ package com.bw.dao.impl;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bw.dao.TodoDao;
 import com.bw.dao.criteria.TodoCriteria;
+import com.bw.hibernate.entity.Author;
 import com.bw.hibernate.entity.Todo;
 import com.bw.hibernate.entity.TodoItem;
 
@@ -28,17 +28,18 @@ public class TestTodoDaoImpl extends AbstractSpringBasedTest {
 	@Test
 	public void testCreateTodo() {
 		Todo t = new Todo();
+		Author a = new Author();
+		a.setId(1);
+		t.setAuthor(a);
 		t.setName("First Todo List");
-		Set<TodoItem> items = new HashSet<TodoItem>();
 		TodoItem i = new TodoItem();
 		i.setValue("First todo item!");
 		i.setOrdering(1);
-		items.add(i);
+		t.addItem(i);
 		i = new TodoItem();
 		i.setValue("Second todo item!");
 		i.setOrdering(2);
-		items.add(i);
-		t.setItems(items);
+		t.addItem(i);
 		assertTrue("Did not get back a valid rid for Todo", dao.create(t) > 0);
 		println("Created Todo with id "+t.getId());
 	}
@@ -49,7 +50,7 @@ public class TestTodoDaoImpl extends AbstractSpringBasedTest {
 		assertTrue("Did not get back any Todo lists", list.size() > 0);
 		println("Got back "+list.size());
 		for (Todo t : list) {
-			println(t.getId() + " " + t.getName()+" by "+t.getAuthor().getUsername());
+			println(t.getId() + " " + t.getName()+" by "+(t.getAuthor() != null ? t.getAuthor().getUsername() : "[none]"));
 			Set<TodoItem> items = t.getItems();
 			println("\tHas "+items.size());
 			for (TodoItem i : items) {

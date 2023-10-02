@@ -3,6 +3,7 @@ package com.bw.dao.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
@@ -20,7 +21,7 @@ import com.bw.hibernate.entity.TodoItem;
 @Repository("todoDao")
 @Transactional(readOnly=true)
 public class TodoDaoImpl extends AbstractDao implements TodoDao {
-
+	private static Logger logger = Logger.getLogger(TodoDaoImpl.class);
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Todo> list(TodoCriteria cri) {
@@ -56,7 +57,9 @@ public class TodoDaoImpl extends AbstractDao implements TodoDao {
 			int i=1;
 			for (TodoItem item : todo.getItems()) {
 				item.setTodo(todo);
-				item.setOrdering(i);
+				if (item.getOrdering() < 0) {
+					item.setOrdering(i);
+				}
 				sesh.save(item);
 				i++;
 			}
@@ -81,7 +84,10 @@ public class TodoDaoImpl extends AbstractDao implements TodoDao {
 			int i=0;
 			for (TodoItem item : todo.getItems()) {
 				item.setTodo(todo);
-				item.setOrdering(++i);
+				if (item.getOrdering() < 0) {
+					item.setOrdering(++i);
+				}
+				logger.debug("Creating Item: "+item.getOrdering()+" - "+item.getValue());
 				sesh.save(item);
 			}
 		}

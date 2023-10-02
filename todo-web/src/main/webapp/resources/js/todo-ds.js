@@ -82,6 +82,13 @@ todoApp.controller('TodoControl', function($scope, $http, $modal, Security) {
 	}
 		
 	$scope.save = function() {
+		var todos = $scope.todos;
+		for (var i=0; i < todos.length; i+=1) {
+			var td = todos[i];
+			for (var k=0; k < td.items.length; k+=1) {
+				td.items[k].ordering = k+1;
+			}
+		}
 		$http.put('rest/todos', $scope.todos).success(function(json) {
 			if (json && json.message) {
 				alert(json.message);

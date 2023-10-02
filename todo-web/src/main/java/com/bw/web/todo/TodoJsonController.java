@@ -19,6 +19,10 @@ import com.bw.web.todo.dto.JsonResponse;
 import com.bw.web.todo.security.SecurityUtils;
 import com.bw.web.todo.security.TodoUser;
 
+/**
+ * TODO: Create DTO objects - avoid @Json and ordering issues
+ *
+ */
 @Controller
 @RequestMapping("/rest")
 public class TodoJsonController {
