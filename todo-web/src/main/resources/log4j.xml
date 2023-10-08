@@ -6,8 +6,8 @@
 		<appender-ref ref="stdout" />
 	</root>
 	
-	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
-		<layout class="org.apache.log4j.PatternLayout">
+	<appender name="stdout" class="org.apache.logging.log4j.ConsoleAppender">
+		<layout class="org.apache.logging.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%5p %c{1}:%L - %m%n" />
 		</layout>
 	</appender>

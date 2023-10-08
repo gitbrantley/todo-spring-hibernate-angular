@@ -1,5 +1,7 @@
 plugins {
 	id 'java'
+	id 'org.springframework.boot' version '3.1.4'
+	id 'io.spring.dependency-management' version '1.1.3'
 }
 
 apply from: "../shared.gradle"
@@ -10,29 +12,19 @@ version = '1.0'
 sourceCompatibility = '17'
 
 dependencies{
-
-	implementation "org.slf4j:jcl-over-slf4j:$slf4jVersion"
-	implementation "org.slf4j:jul-to-slf4j:$slf4jVersion"
-	implementation "org.springframework.security:spring-security-core:$springSecurityVersion"
-	implementation "org.springframework.security:spring-security-config:$springSecurityVersion"
-	implementation "org.springframework.security:spring-security-web:$springSecurityVersion"
-	implementation "org.springframework:spring-webmvc:$springVersion"
-	implementation "com.fasterxml.jackson.core:jackson-core:2.3.3"
-	implementation "com.fasterxml.jackson.core:jackson-databind:2.3.3"
-	implementation "com.fasterxml.jackson.core:jackson-annotations:2.3.3"
-	implementation "javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.1"
-	implementation "taglibs:standard:1.1.2"
-	implementation 'log4j:log4j:1.2.17'
-	//runtime fileTree(dir: serverLib, include: ['servlet-api.jar','jsp-api.jar'])
-	
-	testImplementation "junit:junit:4.8.2"
-	testImplementation "org.springframework:spring-test:$springVersion"
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.session:spring-session-core'
+  implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+  implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+  runtimeOnly 'org.postgresql:postgresql'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.springframework.security:spring-security-test'
 	
 	implementation project(":todo-dao")
 }
 
-
-
-task createWrapper(type:Wrapper){
-	gradleVersion='1.3'
+tasks.named('test') {
+  useJUnitPlatform()
 }
