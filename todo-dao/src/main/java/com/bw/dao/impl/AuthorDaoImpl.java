@@ -1,14 +1,16 @@
 package com.bw.dao.impl;
 
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bw.dao.AuthorDao;
 import com.bw.hibernate.entity.Author;
+
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Root;
 
 @Repository("authorDao")
 @Transactional(readOnly=true)
@@ -22,12 +24,15 @@ public class AuthorDaoImpl extends AbstractDao implements AuthorDao {
 	
 	
 	public Author getByUsername(String un, boolean includeTodos) {
-		Criteria c = session().createCriteria(Author.class, "a");
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Author> query = cb.createQuery(Author.class);
+		Root<Author> author = query.from(Author.class);
+		Path<String> usernamePath = author.get("username");
 		if (includeTodos) {
-			c.setFetchMode("todos", FetchMode.JOIN);
+			//c.setFetchMode("todos", FetchMode.JOIN);
 		}
-		c.add(Restrictions.ilike("username", un));
-		Author a = (Author) c.uniqueResult();
+		query.where(cb.like(usernamePath, un));
+		Author a = (Author) em.createQuery(query).getSingleResult();
 		return a;
 	}
 	
@@ -38,8 +43,5 @@ public class AuthorDaoImpl extends AbstractDao implements AuthorDao {
 	public long create(Author a) {
 		return 0;
 	}
-	
-	public static void main(String[] args) {
-		System.out.println(AuthorDaoImpl.hashPassword("brantley"));
-	}
+
 }

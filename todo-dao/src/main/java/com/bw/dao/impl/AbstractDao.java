@@ -1,23 +1,12 @@
 package com.bw.dao.impl;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import jakarta.persistence.EntityManager;
+
+@Repository
 public class AbstractDao {
 	
-	@Autowired
-	private SessionFactory sessionFactory;
+	EntityManager em;
 
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-	
-	public Session session() {
-		return this.sessionFactory.getCurrentSession();
-	}
 }

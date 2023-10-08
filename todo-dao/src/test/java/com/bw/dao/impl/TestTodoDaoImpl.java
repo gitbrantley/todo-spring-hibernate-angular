@@ -1,12 +1,11 @@
 package com.bw.dao.impl;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bw.dao.TodoDao;
@@ -19,11 +18,7 @@ public class TestTodoDaoImpl extends AbstractSpringBasedTest {
 
 	@Autowired
 	private TodoDao dao;
-	
-	@Before
-	public void before() {
-		
-	}
+
 	
 	@Test
 	public void testCreateTodo() {
@@ -40,14 +35,14 @@ public class TestTodoDaoImpl extends AbstractSpringBasedTest {
 		i.setValue("Second todo item!");
 		i.setOrdering(2);
 		t.addItem(i);
-		assertTrue("Did not get back a valid rid for Todo", dao.create(t) > 0);
+		assertTrue(dao.create(t) > 0, "Did not get back a valid rid for Todo");
 		println("Created Todo with id "+t.getId());
 	}
 	
 	@Test 
 	public void testListTodos() {
 		List<Todo> list = dao.list(new TodoCriteria());
-		assertTrue("Did not get back any Todo lists", list.size() > 0);
+		assertTrue(list.size() > 0, "Did not get back any Todo lists");
 		println("Got back "+list.size());
 		for (Todo t : list) {
 			println(t.getId() + " " + t.getName()+" by "+(t.getAuthor() != null ? t.getAuthor().getUsername() : "[none]"));
